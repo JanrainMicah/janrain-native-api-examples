@@ -1,0 +1,19 @@
+body {
+    font-family: proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.logo {
+    margin-right: 20px;
+}
+
+h1 {
+    color: #14767e;
+    font-size: 50px;
+    margin: 0px;
+}
+a, a:link, a:visited {
+    color: #f15928;
+}
+.content {
+    clear: left;
+    margin-top: 40px;
+}
