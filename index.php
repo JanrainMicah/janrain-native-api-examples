@@ -22,6 +22,15 @@
                     API call to perform a tradtidional sign in.</small>
                     </div>
                 </li>
+                <li>
+                    <a href="traditional-merge/">Traditional Merge</a>
+                    <div>
+                    <small>Uses the <code>/oauth/auth_native</code> and the
+                    <code>/oauth/auth_native_traditional</code> API calls to
+                    merge a social account with an existing traditional
+                    account.</small>
+                    </div>
+                </li>
             </ul>
         </div>
     </body>
