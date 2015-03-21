@@ -7,11 +7,14 @@ body {
 
 h1 {
     color: #14767e;
-    font-size: 50px;
+    font-size: 250%;
     margin: 0px;
 }
 a, a:link, a:visited {
     color: #f15928;
+}
+li {
+    margin-bottom: 1em;
 }
 .content {
     clear: left;
