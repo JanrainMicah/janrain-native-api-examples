@@ -9,6 +9,13 @@
         <div class="content">
             <ul>
                 <li>
+                    <a href="traditional-registration/">Traditional Registration</a>
+                    <div>
+                    <small>Uses the <code>/oauth/register_native_traditional</code>
+                    API call to perform a tradtidional registration.</small>
+                    </div>
+                </li>
+                <li>
                     <a href="traditional-sign-in/">Traditional Sign In</a>
                     <div>
                     <small>Uses the <code>/oauth/auth_native_traditional</code>
