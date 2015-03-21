@@ -6,14 +6,14 @@
     <body>
         <img src="img/janrain-logo.png" class="logo">
         <h1>Native API Examples</h1>
-        <hr>
         <div class="content">
             <ul>
                 <li>
-                    <a href="social-sign-in/">Social Sign In</a>
-                </li>
-                <li>
                     <a href="traditional-sign-in/">Traditional Sign In</a>
+                    <div>
+                    <small>Uses the <code>/oauth/auth_native_traditional</code>
+                    API call to perform a tradtidional sign in.</small>
+                    </div>
                 </li>
             </ul>
         </div>
