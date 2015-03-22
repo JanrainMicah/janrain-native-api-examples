@@ -10,6 +10,8 @@ over the user registration and authentication flows at the cost of the
 convenience and simplicity of the
 [Registration Javascript "widget"](http://developers.janrain.com/overview/registration/registration-overview/javascript-based-solution-for-websites/) .
 
+All examples are written in PHP.
+
 
 Contents
 --------
@@ -42,31 +44,56 @@ Getting Started
 ---------------
 
 1. Create a new Janrain *Login* API client using the
-[`/clients/add`](http://developers.janrain.com/rest-api/methods/api-client-configuration/clients/add-3/)
-API call:
+   [`/clients/add`](http://developers.janrain.com/rest-api/methods/api-client-configuration/clients/add-3/)
+   API call:
 
         curl -X POST \
-        -d client_id=57yzx9cbyczcfs8jsakreh5a4ueq2ynj \
-        -d client_secret=REDACTED \
+        -d client_id=APPLICATION_OWNER_CLIENT_ID \
+        -d client_secret=APPLICATION_OWNER_CLIENT_SECRET \
         -d description='Native API examples login client' \
         -d features='["login_client"]' \
         https://YOUR_APP.janraincapture.com/clients/add
 
-1. [Download the source code](https://github.com/JanrainMicah/janrain-native-api-examples/archive/master.zip)
+2. Add the `default_flow_name` setting to the login client you created in step
+   1 (The flow name is usually "standard" but check with your Janrain
+   representative if in doubt):
+
+        curl -X POST \
+        -d client_id=APPLICATION_OWNER_CLIENT_ID \
+        -d client_secret=APPLICATION_OWNER_CLIENT_SECRET \
+        -d for_client_id=LOGIN_CLIENT_ID_FROM_STEP_1 \
+        -d key=default_flow_name \
+        -d value=standard \
+        https://YOUR_APP.janraincapture.com/settings/set
+
+3. Add the `default_flow_version` setting to the login client you created in
+   in step 1 (The flow version must be provided by your Janrain representative):
+
+        curl -X POST \
+        -d client_id=APPLICATION_OWNER_CLIENT_ID \
+        -d client_secret=APPLICATION_OWNER_CLIENT_SECRET \
+        -d for_client_id=LOGIN_CLIENT_ID_FROM_STEP_1 \
+        -d key=default_flow_version \
+        -d value=497f2277-a8ca-418e-a6dd-e7d30fabe7df \
+        https://YOUR_APP.janraincapture.com/settings/set
+
+4. [Download the source code](https://github.com/JanrainMicah/janrain-native-api-examples/archive/master.zip)
    or fork and clone this repository.
-2. Unzip the files into your web server root. For example:
+
+5. Unzip the files into your web server root. For example:
 
         unzip janrain-native-api-examples-master.zip -d /var/www
 
-3. Rename `config.example.php` to `config.php`.
-4. Add the client ID and secret for login client your created in step 1 to the
-`config.php` file:
+6. Rename `config.example.php` to `config.php`.
+
+7. Add the client ID and secret for login client you created in step 1 to the
+   `config.php` file:
 
         define('JANRAIN_LOGIN_CLIENT_ID', 'Your client ID goes here');
         define('JANRAIN_LOGIN_CLIENT_SECRET', 'Your client secret goes here');
 
-5. Navigate to the examples folder in your web browser. Eg.
-[`http://localhost/janrain-native-api-examples-master/`](http://localhost/janrain-native-api-examples-master/)
+8. Navigate to the examples folder in your web browser. Eg.
+   [`http://localhost/janrain-native-api-examples-master/`](http://localhost/janrain-native-api-examples-master/)
 
 
 Examples
