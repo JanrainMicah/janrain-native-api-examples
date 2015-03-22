@@ -50,7 +50,7 @@ API call:
         -d client_secret=REDACTED \
         -d description='Native API examples login client' \
         -d features='["login_client"]' \
-        https://maple-demo.janraincapture.com/clients/add
+        https://YOUR_APP.janraincapture.com/clients/add
 
 1. [Download the source code](https://github.com/JanrainMicah/janrain-native-api-examples/archive/master.zip)
    or fork and clone this repository.
