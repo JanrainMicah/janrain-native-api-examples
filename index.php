@@ -41,6 +41,16 @@
                     profile.</small>
                     </div>
                 </li>
+                <li>
+                    <a href="forgot-password/">Forgot Password</a>
+                    <div>
+                    <small>Uses the <code>/oauth/forgot_password_native</code>
+                    API call to send a user an email with a link to change their
+                    password. Password is then changed using the
+                    <code>/oauth/token</code> and
+                    <code>/oauth/update_profile_native</code> API calls.</small>
+                    </div>
+                </li>
             </ul>
         </div>
     </body>
