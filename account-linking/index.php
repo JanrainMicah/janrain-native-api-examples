@@ -12,7 +12,7 @@ if (empty($_SESSION['access_token'])) {
 if (!empty($_POST['identifier'])) {
 
     // Unlink Google+ account
-
+    $api_call = '/oauth/unlink_account_native';
     $params = array(
         'client_id' => JANRAIN_LOGIN_CLIENT_ID,
         'locale' => 'en-US',
@@ -21,7 +21,7 @@ if (!empty($_POST['identifier'])) {
     );
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, JANRAIN_CAPTURE_URL.'/oauth/unlink_account_native');
+    curl_setopt($curl, CURLOPT_URL, JANRAIN_CAPTURE_URL.$api_call);
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
@@ -32,7 +32,7 @@ if (!empty($_POST['identifier'])) {
 } elseif (!empty($_POST['token'])) {
 
     // Link Google+ account
-
+    $api_call = '/oauth/link_account_native';
     $params = array(
         'client_id' => JANRAIN_LOGIN_CLIENT_ID,
         'locale' => 'en-US',
@@ -42,7 +42,7 @@ if (!empty($_POST['identifier'])) {
     );
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, JANRAIN_CAPTURE_URL.'/oauth/link_account_native');
+    curl_setopt($curl, CURLOPT_URL, JANRAIN_CAPTURE_URL.$api_call);
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
@@ -135,9 +135,9 @@ foreach ($response->result->profiles as $profile) {
                 </form>
             <?php } ?>
 
-            <h3>API Response:</h3>
             <?php
             if (isset($api_response)) {
+                echo "<h3>$api_call Response:</h3>";
                 echo '<pre>';
                 echo json_encode($api_response, JSON_PRETTY_PRINT);
                 echo '</pre>';

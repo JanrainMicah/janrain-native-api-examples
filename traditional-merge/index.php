@@ -9,7 +9,7 @@ if (!empty($_POST['token'])) {
     // /oauth/auth_native will fail with error code 380. This will setup a
     // state in which Janrain is expecting a merge_token to be passed into a
     // call authenticating the existing traditional account.
-
+    $api_call = '/oauth/auth_native';
     $params = array(
         'client_id' => JANRAIN_LOGIN_CLIENT_ID,
         'locale' => 'en-US',
@@ -20,7 +20,7 @@ if (!empty($_POST['token'])) {
     );
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, JANRAIN_CAPTURE_URL.'/oauth/auth_native');
+    curl_setopt($curl, CURLOPT_URL, JANRAIN_CAPTURE_URL.$api_call);
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
@@ -85,9 +85,10 @@ if (!empty($_POST['token'])) {
                 yet created a traditional account).
             </p>
             <div id="janrainEngageEmbed"></div>
-            <h3>/oauth/auth_native Response:</h3>
+
             <?php
             if (isset($api_response)) {
+                echo "<h3>$api_call Response:</h3>";
                 echo '<pre>';
                 echo json_encode($api_response, JSON_PRETTY_PRINT);
                 echo '</pre>';

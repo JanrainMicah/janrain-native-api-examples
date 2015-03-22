@@ -2,6 +2,7 @@
 require('../config.php');
 
 if (!empty($_POST['email']) && !empty($_POST['password'])) {
+    $api_call = '/oauth/auth_native_traditional';
     $params = array(
         'client_id' => JANRAIN_LOGIN_CLIENT_ID,
         'locale' => 'en-US',
@@ -13,7 +14,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
     );
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, JANRAIN_CAPTURE_URL.'/oauth/auth_native_traditional');
+    curl_setopt($curl, CURLOPT_URL, JANRAIN_CAPTURE_URL.$api_call);
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
@@ -39,9 +40,10 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
                 <div><input type="password" name="password" placeholder="Password"></div>
                 <input type="submit" value="Sign In">
             </form>
-            <h3>/oauth/auth_native_traditional Response:</h3>
+
             <?php
             if (isset($api_response)) {
+                echo "<h3>$api_call Response:</h3>";
                 echo '<pre>';
                 echo json_encode($api_response, JSON_PRETTY_PRINT);
                 echo '</pre>';
