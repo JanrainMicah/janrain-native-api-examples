@@ -13,7 +13,7 @@ if (!empty($_POST['token'])) {
     $params = array(
         'client_id' => JANRAIN_LOGIN_CLIENT_ID,
         'locale' => 'en-US',
-        'response_type' => 'code',
+        'response_type' => 'token',
         'redirect_uri' => 'https://localhost',
         'thin_registration' => 'true',
         'token' => $_POST['token']

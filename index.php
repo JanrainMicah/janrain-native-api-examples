@@ -32,6 +32,15 @@
                     account.</small>
                     </div>
                 </li>
+                <li>
+                    <a href="account-linking/">Account Linking</a>
+                    <div>
+                    <small>Uses the <code>/oauth/link_account_native</code>
+                    and <code>/oauth/unlink_account_native</code> API calls
+                    to link/unlink additional social accounts to a user
+                    profile.</small>
+                    </div>
+                </li>
             </ul>
         </div>
     </body>
