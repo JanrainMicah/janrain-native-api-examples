@@ -73,12 +73,49 @@ Examples
 --------
 
 ### Social Registration
+
+Social Registration consists of a new user authenticating with an identity
+provider (Facebook, Google, etc.) as the first step in a 2-step process to
+register a new account. Janrain handles the interaction between the end-user
+and the identity provider using the appropriate protocol
+(OAuth 2.0/OpenID/SAML 2.0) to authenticate the user and obtain user data.
+
+
+The second step is a registration form which ensures required data fields are
+collected from the user. The *User Data* can be used to pre-populate the
+registration form.
+
+![Social Registration Sequence Diagram](https://raw.githubusercontent.com/JanrainMicah/janrain-native-api-examples/master/img/social-registration-sequence.png)
+
+**Reference Documentation**
+
+* [/oauth/auth_native](http://developers.janrain.com/rest-api/methods/authentication/oauth/auth_native/)
+* [/oauth/register_native/](http://developers.janrain.com/rest-api/methods/authentication/oauth/register_native/)
+
+
 ### Social Sign In
+
+
 ### Traditional Registration
+
+
 ### Traditional Sign In
+
+
 ### Social Merge Accounts
+
+
 ### Traditional Merge Accounts
+
+
 ### Account Linking
+
+
 ### Edit Profile
+
+
 ### Forgot Password
+
+
 ### Verify Email
+
