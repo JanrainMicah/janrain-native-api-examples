@@ -70,6 +70,12 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 $response = json_decode(curl_exec($curl));
 curl_close($curl);
 
+if ($response->stat == "error" && $response->code == 200) {
+    // access token is expired
+    unset($_SESSION['access_token']);
+    header('Location: sign-in.php');
+    die();
+}
 foreach ($response->result->profiles as $profile) {
     if ($profile->domain == "google.com") {
         $google_id = $profile->identifier;
