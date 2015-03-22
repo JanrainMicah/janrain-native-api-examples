@@ -1,21 +1,19 @@
 <?php
 require('../config.example.php');
 
-if (!empty($_POST['token'])) {
+if (!empty($_GET['merge_token']) && !empty($_POST['token'])) {
 
-    // The 'token' parameter is the "Engage Token" from Janrain Social Login.
-    // Assuming there is already a user record with the same email address as
-    // the email addressed returned by the provider, a call to
-    // /oauth/auth_native will fail with error code 380. This will setup a
-    // state in which Janrain is expecting a merge_token to be passed into a
-    // call authenticating the existing traditional account.
+    // The social authentication for the original social account
+    // is passed to the /oauth/auth_native call much like a typical
+    // social sign in, however, the merge_token is also passed to the call which will
+    // link the social provider account to the existing social account.
     $api_call = '/oauth/auth_native';
     $params = array(
         'client_id' => JANRAIN_LOGIN_CLIENT_ID,
         'locale' => 'en-US',
         'response_type' => 'token',
         'redirect_uri' => 'https://localhost',
-        'thin_registration' => 'true',
+        'merge_token' => $_GET['merge_token'],
         'token' => $_POST['token']
     );
 
@@ -27,18 +25,7 @@ if (!empty($_POST['token'])) {
 
     $api_response = json_decode(curl_exec($curl));
     curl_close($curl);
-
-    // The 380 error code indicates a user with this email address already
-    // exists and the "capture" existing_provider indicates that the existint
-    // record is a Traditional account.
-
-    if ($api_response->stat == "error" && $api_response->code == 380
-        && $api_response->existing_provider = "capture") {
-        header("Location: merge.php?merge_token=".$_POST['token']);
-        die();
-    }
 }
-
 ?>
 <html>
     <head>
@@ -79,10 +66,8 @@ if (!empty($_POST['token'])) {
         <hr>
         <div class="content">
             <p>
-                Sign in with a social provider which returns the same email
-                address as your existing social account. (<a
-                href="../social-registration/">Click here</a> if you have not
-                yet created a social account).
+                There is an existing account with this email address. If you would like to 
+                merge them, please authenticate with the original social account:
             </p>
             <div id="janrainEngageEmbed"></div>
 
