@@ -66,12 +66,14 @@ if (!empty($_GET['merge_token']) && !empty($_POST['token'])) {
         <hr>
         <div class="content">
             <p>
-                There is an existing account with this email address. If you would like to 
-                merge them, please authenticate with the original social account:
+                Authenticate with the original social provider to merge the accounts:
             </p>
             <div id="janrainEngageEmbed"></div>
-
+            <br/>
             <?php
+            if (isset($api_response) && $api_response->{'stat'} == 'ok' && $api_response->{'access_token'}) {
+                echo 'Your accounts have been merged and your access token is '.$api_response->{'access_token'};
+            }
             if (isset($api_response)) {
                 echo "<h3>$api_call Response:</h3>";
                 echo '<pre>';
