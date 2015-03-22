@@ -1,88 +1,92 @@
+<?php
+require('../config.example.php');
+if (!empty($_POST['token'])) {
+    // This demo is social sign in only. User must have an existing account using the same
+    //social provider. There is some logic that handles different scenarios. 
+    $api_call = '/oauth/auth_native';
+    $params = array(
+        'client_id' => JANRAIN_LOGIN_CLIENT_ID,
+        'locale' => 'en-US',
+        'response_type' => 'token',
+        'redirect_uri' => 'https://localhost',
+        'thin_registration' => 'true',
+        'token' => $_POST['token']
+    );
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, JANRAIN_CAPTURE_URL.$api_call);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
+    $api_response = json_decode(curl_exec($curl));
+    curl_close($curl);
+    
+    //Logic to handle three different scenarios with social authentication
+    if ($api_response->{'code'} == 310){
+        //If email does not exist
+        $userResponse = 'That email does not exist. This demo is social sign-in only.';
+    } else if ($api_response->{'code'} == 380){
+        //If merge needs to occur 
+        $userResponse = 'That email exists, but with a different provider. This demo is social sign-in only.';
+    } else if ($api_response->{'stat'} == 'ok'){
+        //If user exists, hand back access token
+        $accessToken = $api_response->{'access_token'};
+        $userResponse = 'Your access token is '. $accessToken; 
+    } else {
+        echo '';
+    }
+}
+?>
 <html>
     <head>
-        <title>Social Authentication</title>
+        <title>Social Sign In</title>
         <link rel="stylesheet" type="text/css" href="../css/styles.css">
-        <!--jQuery used for ajax token post-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <!--Social authentication and token handling-->
         <script>
-        //Initial social authentication and settings
-        //To configure the social settings in the Janrain dashaboard to generate this code,
-        //see developers portal: http://developers.janrain.com/how-to/social-login/deploy-social-login/
         (function() {
             if (typeof window.janrain !== 'object') window.janrain = {};
             if (typeof window.janrain.settings !== 'object') window.janrain.settings = {};
-
-            /* _______________ can edit below this line _______________ */
-
-            janrain.settings.tokenAction='event';
-            janrain.settings.tokenUrl = 'http://localhost';
-            janrain.settings.type = 'embed';
-            janrain.settings.appId = 'jfhdhnphmnoonffnahjn';
-            janrain.settings.appUrl = 'https://janrain-se-demo.rpxnow.com';
-            janrain.settings.providers = ["google","facebook"];
-            janrain.settings.language = 'en';
-            janrain.settings.linkClass = 'janrainEngage';
-
-            /* _______________ can edit above this line _______________ */
-
+            janrain.settings.tokenUrl = window.location.href;
             function isReady() { janrain.ready = true; };
             if (document.addEventListener) {
               document.addEventListener("DOMContentLoaded", isReady, false);
             } else {
               window.attachEvent('onload', isReady);
             }
-
             var e = document.createElement('script');
             e.type = 'text/javascript';
             e.id = 'janrainAuthWidget';
-
             if (document.location.protocol === 'https:') {
-              e.src = 'https://rpxnow.com/js/lib/janrain-se-demo/engage.js';
+              e.src = 'https://rpxnow.com/js/lib/maple/engage.js';
             } else {
-              e.src = 'http://widget-cdn.rpxnow.com/js/lib/janrain-se-demo/engage.js';
+              e.src = 'http://widget-cdn.rpxnow.com/js/lib/maple/engage.js';
             }
-
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(e, s);
-
         })();
-
-        //The token is handed back to the client side and posted to the social-api script
-        var janrainWidgetOnload = function () {
-            janrain.events.onProviderLoginToken.addHandler(function (data) {
-                if(typeof data.token != "undefined"){
-                    if (console && typeof console != "undefined"){
-                        var var_token = data.token;
-                        $.ajax({
-                            url: 'social-api.php',
-                            type: 'GET',
-                             data: { var_token: var_token },
-                             success: function(data) {
-                                 $('#result').html(data);
-                             }
-                         });
-                    }
-                    document.getElementById("socialAuthentication").style.display='none';
-                }else{
-                    console.log("Invalid Data Retrieved");
-                }
-            }); 
-        }
         </script>
     </head>
     <body>
-        
         <img src="../img/janrain-logo.png" class="logo">
-        <h1>Social Sign-In</h1>
+        <h1>Social Sign In</h1>
         <hr>
-        <div id="socialAuthentication">
-            <div id="janrainEngageEmbed"></div>
-        </div>
         <div class="content">
+            <p>
+                For this demo, you must already have an existing social account. 
+                Sign in with a social provider that you have used previously (<a
+                href="../social-registration/">Click here</a> if you have not
+                yet created a social account).
+            </p>
+            <div id="janrainEngageEmbed"></div>
+            <br/>
 
-            <h3>/oauth/auth_native Response:</h3>
-            <div id="result"></div>
+            <?php
+            if (isset($api_response)) {
+                echo "<h2>$userResponse</h2>";
+                echo "<h3>$api_call Response:</h3>";
+                echo '<pre>';
+                echo json_encode($api_response, JSON_PRETTY_PRINT);
+                echo '</pre>';
+            }
+            ?>
         </div>
     </body>
 </html>
