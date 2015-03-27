@@ -33,6 +33,33 @@
                     </div>
                 </li>
                 <li>
+                    <a href="social-registration/">Social Registration</a>
+                    <div>
+                    <small>Authenticates with Janrain's social authentication
+                    service. Then, uses the <code>/oauth/auth_native</code> to
+                    to check the status of the email address and the
+                    <code>/oauth/register_native</code> API calls to
+                    register a user.</small>
+                    </div>
+                </li>
+                <li>
+                    <a href="social-sign-in/">Social Sign In</a>
+                    <div>
+                    <small>Authenticates with Janrain's social authentication
+                    service. Then, uses the <code>/oauth/auth_native</code> to
+                    to check the status of the email address then hands back
+                    an access token if sign in is permitted.</small>
+                    </div>
+                </li>
+                <li>
+                    <a href="social-merge/">Social Merge</a>
+                    <div>
+                    <small>Uses the <code>/oauth/auth_native</code> API
+                    call twice to merge a social account with an existing 
+                    social account.</small>
+                    </div>
+                </li>
+                <li>
                     <a href="account-linking/">Account Linking</a>
                     <div>
                     <small>Uses the <code>/oauth/link_account_native</code>
