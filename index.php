@@ -60,6 +60,13 @@
                     </div>
                 </li>
                 <li>
+                    <a href="edit-profile/">Edit Profile</a>
+                    <div>
+                    <small>Uses the <code>/oauth/update_profile_native</code> 
+                    API call to update a user profile.</small>
+                    </div>
+                </li>
+                <li>
                     <a href="account-linking/">Account Linking</a>
                     <div>
                     <small>Uses the <code>/oauth/link_account_native</code>
