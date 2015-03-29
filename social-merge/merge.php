@@ -1,5 +1,5 @@
 <?php
-require('../config.example.php');
+require(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php');
 
 if (!empty($_GET['merge_token']) && !empty($_POST['token'])) {
 

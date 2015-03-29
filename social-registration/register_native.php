@@ -1,5 +1,5 @@
 <?php
-require('../config.example.php');
+require(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php');
 
 //After the auth_native API is called and the user does not exist, the register_native
 //call will create the user record

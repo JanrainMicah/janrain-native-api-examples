@@ -1,5 +1,5 @@
 <?php
-require('../config.example.php');
+require(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php');
 if (!empty($_POST['token'])) {
     // This demo is for social registration. The first call is to see whether an email exists and to 
     //get the prereg_fields to fill the registration form. 

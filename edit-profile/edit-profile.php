@@ -1,7 +1,7 @@
 <?php
     session_start(); 
     $accessToken = $_SESSION["token"];
-    require('config.example.php');
+    require(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php');
     //Entity call retrieves the user information to pre-populate the Edit Profile fields
     $entity_api_call = '/entity';
     $entityParams = array(

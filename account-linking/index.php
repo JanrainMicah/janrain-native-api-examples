@@ -1,5 +1,5 @@
 <?php
-require('../config.php');
+require(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php');
 
 // A valid access token is required to link and unlink social profiles. If an
 // access token is not found in the session vars, redirect to a sign-in page.

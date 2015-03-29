@@ -1,5 +1,5 @@
 <?php
-require('config.example.php');
+require(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php');
 if (!empty($_POST['token'])) {
     // This demo is social sign in only. User must have an existing account using the same
     //social provider. There is some logic that handles different scenarios. 
