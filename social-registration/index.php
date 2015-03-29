@@ -35,11 +35,11 @@ require('register_native.php');
         <h1>Social Sign in and Registration</h1>
         <hr>
         <div class="content">
-            
+
             <p>
-                Either sign in with an existing account or register a new one. 
+                Either sign in with an existing account or register a new one.
             </p>
-            
+
             <div id="janrainEngageEmbed"></div>
             <br/>
             <form method="post" action="index.php">

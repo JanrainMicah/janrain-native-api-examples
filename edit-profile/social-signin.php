@@ -2,7 +2,7 @@
 require(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php');
 if (!empty($_POST['token'])) {
     // This demo is social sign in only. User must have an existing account using the same
-    //social provider. There is some logic that handles different scenarios. 
+    //social provider. There is some logic that handles different scenarios.
     $api_call = '/oauth/auth_native';
     $params = array(
         'client_id' => JANRAIN_LOGIN_CLIENT_ID,
@@ -20,13 +20,13 @@ if (!empty($_POST['token'])) {
     $api_response = json_decode(curl_exec($curl));
     $accessToken = $api_response->{'access_token'};
     curl_close($curl);
-    
+
     //Logic to handle three different scenarios with social authentication
     if ($api_response->{'code'} == 310){
         //If email does not exist
         $userResponse = 'That email does not exist. This demo is social sign-in only.';
     } else if ($api_response->{'code'} == 380){
-        //If merge needs to occur 
+        //If merge needs to occur
         $userResponse = 'That email exists, but with a different provider. This demo is social sign-in only.';
     } else if ($api_response->{'stat'} = 'ok' && $accessToken){
         session_start();
@@ -34,7 +34,7 @@ if (!empty($_POST['token'])) {
         header("Location: edit-profile.php");
         die();
     } else {
-        
+
     }
 }
 ?>

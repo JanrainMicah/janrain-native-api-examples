@@ -1,5 +1,5 @@
 <?php
-    session_start(); 
+    session_start();
     $accessToken = $_SESSION["token"];
     require(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php');
     //Entity call retrieves the user information to pre-populate the Edit Profile fields
@@ -69,7 +69,7 @@
         <h1>Edit Profile</h1>
         <hr>
         <div class="content">
-            
+
             <form method="post" action="edit-profile.php">
                 <div><input type="text" name="firstName" placeholder="First Name" value="<?php echo $firstName ?>"></div>
                 <div><input type="text" name="lastName" placeholder="Last Name" value="<?php echo $lastName ?>"></div>

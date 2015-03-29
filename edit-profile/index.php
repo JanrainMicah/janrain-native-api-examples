@@ -9,7 +9,7 @@
         <hr>
         <div class="content">
             <p>
-                For this demo, you must already have an existing social or 
+                For this demo, you must already have an existing social or
                 traditional account. Select authentication method.
             </p>
             <br/>

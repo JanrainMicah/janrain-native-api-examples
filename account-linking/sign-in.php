@@ -1,5 +1,5 @@
 <?php
-require('../config.php');
+require(dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php');
 session_start();
 
 if (!empty($_POST['email']) && !empty($_POST['password'])) {

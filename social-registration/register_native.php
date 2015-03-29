@@ -25,6 +25,5 @@ if (!empty($_POST['email']) && !empty($_POST['token'])) {
     $api_response = json_decode(curl_exec($curl));
     $accessToken = $api_response->{'access_token'};
     curl_close($curl);
-    
 }
 ?>

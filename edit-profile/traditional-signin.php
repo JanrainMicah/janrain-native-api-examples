@@ -21,13 +21,13 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 
     $api_response = json_decode(curl_exec($curl));
     curl_close($curl);
-    
+
     //Logic to handle three different scenarios with social authentication
     if ($api_response->{'code'} == 310){
         //If email does not exist
         $userResponse = 'That email does not exist. This demo is social sign-in only.';
     } else if ($api_response->{'code'} == 380){
-        //If merge needs to occur 
+        //If merge needs to occur
         $userResponse = 'That email exists, but with a different provider. This demo is social sign-in only.';
     } else if ($api_response->{'stat'} = 'ok' && $accessToken){
         session_start();
@@ -35,7 +35,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
         header("Location: edit-profile.php");
         die();
     } else {
-        
+
     }
 }
 
