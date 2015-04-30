@@ -56,6 +56,10 @@ require('register_native.php');
                 if (!empty($accessToken)) {
                     echo "<h2>Your access token is $accessToken</h2>";
                 }
+            //Show auth_info token
+            if (!empty($token)) {
+                            echo "<h3>Your Engage 'auth_info' token is $token</h3>";
+                }
                 echo "<h3>$api_call Response:</h3>";
                 echo '<pre>';
                 echo json_encode($api_response, JSON_PRETTY_PRINT);
