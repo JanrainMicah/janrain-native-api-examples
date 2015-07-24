@@ -20,6 +20,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 
     $api_response = json_decode(curl_exec($curl));
+    $accessToken = $api_response->{'access_token'};
     curl_close($curl);
 
     //Logic to handle three different scenarios with social authentication
@@ -51,7 +52,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
         <hr>
         <div class="content">
 
-            <form method="post" action="edit-profile.php">
+            <form method="post" action="traditional-signin.php">
                 <div><input type="text" name="email" placeholder="Email address"></div>
                 <div><input type="password" name="password" placeholder="Password"></div>
                 <input type="submit" value="Sign In">
